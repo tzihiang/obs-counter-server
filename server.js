@@ -29,6 +29,9 @@ app.post('/value1', (req, res) => {
     } else if (action === 'decrement') {
         value -= 1;
     }
+    else if (action === 'reset') {
+        value = 40;
+    }
     writeValue(FILE_PATH_1, value);
     res.json({ value });
 });
@@ -43,9 +46,14 @@ app.post('/value2', (req, res) => {
     let value = readValue(FILE_PATH_2);
     if (action === 'increment') {
         value += 1;
-    } else if (action === 'decrement') {
+    }
+    else if (action === 'decrement') {
         value -= 1;
     }
+    else if (action === 'reset') {
+        value = 40;
+    }
+
     writeValue(FILE_PATH_2, value);
     res.json({ value });
 });
