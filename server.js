@@ -9,11 +9,20 @@ const FILE_PATH_2 = 'value2.txt';
 
 app.use(bodyParser.json());
 
-// app.use(cors({
-//     origin: 'http://localhost:3000'
-// }));
+// Add your origin URLs here. This includes the IPv4 of the machine that is hosting the UI server and its respective port
+const allowedOrigins = ['http://localhost:3000'];
 
-app.use(cors());
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+};
+
+app.use(cors(corsOptions));
 
 const readValue = (filePath) => {
     return parseInt(fs.readFileSync(filePath, 'utf8').trim());
