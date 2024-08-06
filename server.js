@@ -48,7 +48,7 @@ app.post('/life/:id', (req, res) => {
     res.send(`Value Updated to ${newValue}`)
 });
 
-app.get('/ip', (req, res) => {
+app.get('/api/ip', (req, res) => {
     res.json({ ip: localIpAddress });
 });
 
