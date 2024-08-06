@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
+const getLocalIpAddress = require("./utils/ipFinder");
 
 const app = express();
 app.use(bodyParser.json());
@@ -48,15 +49,6 @@ app.post("/life/:id", (req, res) => {
   const newValue = req.body.value;
   writeValue(filePath, newValue);
   res.send(`Value Updated to ${newValue}`);
-});
-
-app.get("/api/ip", (req, res) => {
-  fs.readFile(path.join(__dirname, "ip_address.txt"), "utf8", (err, data) => {
-    if (err) {
-      return res.status(500).send("Error reading file");
-    }
-    res.send(data.trim());
-  });
 });
 
 const PORT = process.env.PORT || 5000;
